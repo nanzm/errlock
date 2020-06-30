@@ -1,3 +1,5 @@
+import { config } from '../config'
+
 function createHttpRequest () {
   if (window.ActiveXObject) {
     // eslint-disable-next-line no-undef
@@ -45,4 +47,11 @@ AliLogTracker.prototype = {
   }
 }
 
-export default AliLogTracker
+const aliLog = new AliLogTracker(config.aliYun.endpoint, config.aliYun.project, config.aliYun.logStore)
+
+export function aliLogger (data) {
+  Object.keys(data).forEach((k) => {
+    aliLog.push(k, data[k])
+  })
+  aliLog.logger()
+}

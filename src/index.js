@@ -1,4 +1,3 @@
-import { sendEvent } from './stat/index'
 import { sendError, attachUser, catchBrowserError } from './browser/index'
 import { reportUAInfo } from './browser/uaParse'
 import { warn, error } from './helper'
@@ -31,9 +30,6 @@ export default {
   init,
 
   attachUser,
-
-  // 打点
-  stat: sendEvent,
 
   // 主动上报
   error: sendError

@@ -8,9 +8,9 @@
     "bug",
     "report"
   ],
-  "main": "dist/errlock.cjs.js",
-  "module": "dist/errlock.esm.js",
-  "browser": "dist/errlock.umd.js",
+  "main": "dist/anaSdk.cjs.js",
+  "module": "dist/anaSdk.esm.js",
+  "browser": "dist/anaSdk.umd.js",
   "author": "nanzm",
   "license": "MIT",
   "repository": {

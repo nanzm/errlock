@@ -12,7 +12,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      name: 'errlock',
+      name: 'anaSdk',
       file: pkg.browser,
       format: 'umd',
       sourcemap: true

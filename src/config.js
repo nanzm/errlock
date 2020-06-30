@@ -1,11 +1,14 @@
 import { uuid4 } from './helper'
 
 export const config = {
-  url: 'https://nancode.cn/api/stat/error',
-  imgUrl: 'https://nancode.cn/img/stat/error',
+  url: '',
   appId: '',
-  isBrowser: true,
-  uid: ''
+  uid: '',
+  aliYun: {
+    endpoint: 'cn-hangzhou.log.aliyuncs.com',
+    project: 'nan-web-tracking',
+    logStore: 'test-store'
+  }
 }
 
 export function resolveConfig (cfg) {
@@ -16,12 +19,12 @@ export function resolveConfig (cfg) {
 }
 
 function genUid () {
-  let uid = localStorage.getItem('errlock_uid')
+  let uid = localStorage.getItem('ana-sdk-uid')
   if (uid) {
     return uid
   }
 
   uid = uuid4()
-  localStorage.setItem('errlock_uid', uid)
+  localStorage.setItem('ana-sdk-uid', uid)
   return uid
 }

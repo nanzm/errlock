@@ -1,5 +1,5 @@
-import { transformError } from './report'
-import { tag } from '../constant'
+import { transformError } from '../report/index'
+import { ErrorTag } from '../constant'
 
 export function windowAjaxError () {
   const protocol = window.location.protocol
@@ -53,7 +53,7 @@ export function windowAjaxError () {
         // 当一个XMLHttpRequest请求完成的时候会触发load 事件。
         if (type === 'load') {
           transformError({
-            tag: tag.AJAX_ERROR,
+            tag: ErrorTag.AJAX_ERROR,
             msg: `event:${type.toUpperCase()} ${responseURL} ${status}`,
             desc: JSON.stringify({
               statusText: statusText,
@@ -71,7 +71,7 @@ export function windowAjaxError () {
         }
 
         transformError({
-          tag: tag.AJAX_ERROR,
+          tag: ErrorTag.AJAX_ERROR,
           msg: msg,
           desc: JSON.stringify({
             statusText: type,

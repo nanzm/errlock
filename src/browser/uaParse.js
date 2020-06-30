@@ -1,6 +1,6 @@
 import Browser from 'bowser'
 import { config } from '../config'
-import { aliLogger } from './report'
+import { transformDevice } from '../report/index'
 
 export function reportUAInfo () {
   const browser = Browser.getParser(window.navigator.userAgent)
@@ -8,7 +8,7 @@ export function reportUAInfo () {
   const ua = browser.getUA()
 
   setTimeout(() => {
-    aliLogger({
+    transformDevice({
       uid: config.uid,
       b_ua: ua,
       b_result: JSON.stringify(res)

@@ -1,5 +1,6 @@
 import { getLineColNum, getStackTrace, isError } from '../helper'
-import { transformError } from './report'
+import { transformError } from '../report/index'
+import { ErrorTag } from '../constant'
 
 export function windowConsole () {
   if (!window.console || !window.console.error) return
@@ -19,7 +20,7 @@ export function windowConsole () {
     })
 
     transformError({
-      tag: 'consoleError',
+      tag: ErrorTag.CONSOLE_ERROR,
       fileUrl: fileUrl,
       lineno: lineNo,
       colno: colNo,

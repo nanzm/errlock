@@ -13,7 +13,7 @@ export function isPromise (val) {
 }
 
 export function assert (condition, msg) {
-  if (!condition) throw new Error(`[errlock] ${msg}`)
+  if (!condition) throw new Error(`[ana-sdk] ${msg}`)
 }
 
 export function partial (fn, arg) {
