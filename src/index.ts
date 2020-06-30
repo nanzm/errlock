@@ -24,12 +24,12 @@ const defaultOpts = {
 }
 
 function init (options: Options) {
-  if (!window._ERR_LOCK_) {
+  if (!window._ANA_SDK_) {
     const client = new Sdk(Object.assign(defaultOpts, options))
-    window._ERR_LOCK_ = client
+    window._ANA_SDK_ = client
     return client
   } else {
-    return window._ERR_LOCK_
+    return window._ANA_SDK_
   }
 }
 

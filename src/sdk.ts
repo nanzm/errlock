@@ -1,33 +1,20 @@
-class ErrLock {
+import {Breadcrumb} from './type'
 
+class Ana {
   private config: Record<string, any>
-
-  private globalContext: any
-
-  private dataHub: any
+  private globalContext: object
+  private Breadcrumb: Breadcrumb[]
 
   public constructor (options) {
-    // 配置
     this.config = options
-
-    // 全局环境信息
-    this.globalContext = {
-      ua: window.navigator.userAgent,
-    }
-
-    // 存储最近用户的 5条记录
-    this.dataHub = []
-
-    console.log(this)
+    this.globalContext = {}
+    this.Breadcrumb = []
   }
-
-  private _catchBrowserError (): void {
-    console.log('--------------------------------')
-  }
+  
 
 }
 
-export default ErrLock
+export default Ana
 
 
 
