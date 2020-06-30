@@ -1,5 +1,7 @@
 import { logger } from '../debug'
 import { config } from '../config'
+import AliLogTracker from '../log'
+
 const log = logger('report/ajax.js')
 
 /**
@@ -37,6 +39,7 @@ export function post (url, data) {
 }
 
 const entry = {}
+
 export function imgReport (url, data) {
   if (!url || !data) {
     return
@@ -60,13 +63,21 @@ export function imgReport (url, data) {
   image.src = url + (url.indexOf('?') < 0 ? '?' : '&') + items.join('&')
 }
 
+const aliLog = new AliLogTracker('cn-hangzhou.log.aliyuncs.com', 'nan-web-tracking', 'test-store')
+
 export function transformError (data) {
   data.path = window.location.href
   data.appid = config.appId
   data.uid = config.uid
 
   setTimeout(() => {
-    console.log('---------errlock-拦截-------' + Date.now())
-    imgReport(config.imgUrl, data)
-  }, 20)
+    aliLogger(data)
+  }, 0)
+}
+
+export function aliLogger (data) {
+  Object.keys(data).forEach((k) => {
+    aliLog.push(k, data[k])
+  })
+  aliLog.logger()
 }
