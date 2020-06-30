@@ -1,3 +1,4 @@
+import { StorageKey } from './constant'
 import { uuid4 } from './helper'
 
 export const config = {
@@ -11,20 +12,16 @@ export const config = {
   }
 }
 
-export function resolveConfig (cfg) {
+export function mergeConfig (cfg) {
   cfg.uid = genUid()
-
-  // 合并
   Object.assign(config, cfg)
 }
 
 function genUid () {
-  let uid = localStorage.getItem('ana-sdk-uid')
-  if (uid) {
-    return uid
-  }
+  let uid = localStorage.getItem(StorageKey.UidKey)
+  if (uid) return uid
 
   uid = uuid4()
-  localStorage.setItem('ana-sdk-uid', uid)
+  localStorage.setItem(StorageKey.UidKey, uid)
   return uid
 }

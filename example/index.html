@@ -4,30 +4,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-        }
-
         button {
-            width: 200px;
             display: block;
-            background-color: #1DA57A;
-            color: #fff;
             outline: none;
             border: none;
-            padding: 15px;
+            color: #ccc;
+            padding: 15px 30px;
             font-size: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
-
     </style>
     <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
     <script src="../dist/anaSdk.umd.js"></script>
     <script>
-      errlock.init({
+      anaSdk.init({
         appId: '1'
       })
     </script>

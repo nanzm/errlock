@@ -1,4 +1,4 @@
-import { transformError } from '../report/index'
+import { enhanceError } from '../report/index'
 import { ErrorTag } from '../constant'
 
 export function windowAjaxError () {
@@ -52,10 +52,10 @@ export function windowAjaxError () {
 
         // 当一个XMLHttpRequest请求完成的时候会触发load 事件。
         if (type === 'load') {
-          transformError({
-            tag: ErrorTag.AJAX_ERROR,
-            msg: `event:${type.toUpperCase()} ${responseURL} ${status}`,
-            desc: JSON.stringify({
+          enhanceError({
+            error_tag: ErrorTag.AjaxError,
+            error_msg: `event:${type.toUpperCase()} ${responseURL} ${status}`,
+            error_extra: JSON.stringify({
               statusText: statusText,
               apiUrl: responseURL,
               response: response
@@ -70,10 +70,10 @@ export function windowAjaxError () {
           msg += attr.duration + 'ms'
         }
 
-        transformError({
-          tag: ErrorTag.AJAX_ERROR,
-          msg: msg,
-          desc: JSON.stringify({
+        enhanceError({
+          error_tag: ErrorTag.AjaxError,
+          error_msg: msg,
+          error_extra: JSON.stringify({
             statusText: type,
             apiUrl: attr.apiUrl,
             method: attr.method,

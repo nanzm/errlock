@@ -1,5 +1,5 @@
 import { getLineColNum, getStackTrace, isError } from '../helper'
-import { transformError } from '../report/index'
+import { enhanceError } from '../report/index'
 import { ErrorTag } from '../constant'
 
 export function windowConsole () {
@@ -19,8 +19,8 @@ export function windowConsole () {
       return JSON.stringify(item)
     })
 
-    transformError({
-      tag: ErrorTag.CONSOLE_ERROR,
+    enhanceError({
+      err_type: ErrorTag.ConsoleError,
       fileUrl: fileUrl,
       lineno: lineNo,
       colno: colNo,

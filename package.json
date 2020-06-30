@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "bowser": "^2.9.0",
-    "core-js": "^3.6.4"
+    "core-js": "^3.6.4",
+    "perfume.js": "^5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

@@ -41,6 +41,6 @@ export default [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }
     ],
-    external: ['bowser']
+    external: ['bowser', 'perfume.js']
   }
 ]

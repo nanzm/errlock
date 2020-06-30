@@ -1,13 +1,13 @@
 import { getLineColNum, isFunction } from '../helper'
-import { transformError } from '../report/index'
+import { enhanceError } from '../report/index'
 import { ErrorTag } from '../constant'
 
 export function windowOnError () {
   const OriginWindowError = window.onerror
   window.onerror = function (msg, fileUrl, lineno,
     colno, error) {
-    transformError({
-      tag: ErrorTag.JS_ERROR,
+    enhanceError({
+      tag: ErrorTag.JsError,
       fileUrl,
       lineno,
       colno,
@@ -34,12 +34,12 @@ export function windowListenerError () {
 
       // js css 资源加载错误
       const url = target.src || target.href
-      transformError({
-        tag: ErrorTag.LOAD_RES_ERROR,
+      enhanceError({
+        tag: ErrorTag.LoadResError,
         fileUrl: url,
         lineno: '',
         colno: '',
-        msg: e.target.outerHTML,
+        error_msg: e.message,
         desc: ''
       })
     }
@@ -54,8 +54,8 @@ export function windowUnhandledRejectionError () {
       const stack = e.reason.stack
       const { lineNo, colNo, fileUrl } = getLineColNum(stack)
 
-      transformError({
-        tag: ErrorTag.UNHANDLED_REJECTION_ERROR,
+      enhanceError({
+        tag: ErrorTag.UnHandledRejectionError,
         fileUrl: fileUrl,
         lineno: lineNo,
         colno: colNo,

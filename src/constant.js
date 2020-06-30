@@ -1,12 +1,19 @@
+export const DataTag = {
+  DeviceInfo: 'DEVICE_INFO',
+  PerformanceInfo: 'PERFORMANCE_INFO',
+  ErrorData: 'ERROR_DATA',
+  BreadcrumbsData: 'BREADCRUMBS_DATA'
+}
+
 export const ErrorTag = {
-  CONSOLE_ERROR: 'consoleError',
-  LOAD_RES_ERROR: 'loadResError',
-  JS_ERROR: 'jsError',
-  UNHANDLED_REJECTION_ERROR: 'UnHandledRejectionError',
-  AJAX_ERROR: 'ajaxError',
-  FETCH_ERROR: 'fetchError'
+  ConsoleError: 'CONSOLE_ERROR',
+  LoadResError: 'LOAD_RES_ERROR',
+  JsError: 'JS_ERROR',
+  UnHandledRejectionError: 'UNHANDLED_REJECTION_ERROR',
+  AjaxError: 'AJAX_ERROR',
+  FetchError: 'FETCH_ERROR'
 }
 
 export const StorageKey = {
-  UID_KYE: 'AnaSdkUid'
+  UidKey: 'ANA_SDK_UID'
 }
