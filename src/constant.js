@@ -17,3 +17,8 @@ export const ErrorTag = {
 export const StorageKey = {
   UidKey: 'ANA_SDK_UID'
 }
+
+export const W = window
+export const D = W.Document
+export const S = W.Screen
+export const C = W.console

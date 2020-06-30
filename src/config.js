@@ -1,7 +1,7 @@
 import { StorageKey } from './constant'
 import { uuid4 } from './helper'
 
-export const config = {
+const config = {
   url: '',
   appId: '',
   uid: '',
@@ -15,6 +15,7 @@ export const config = {
 export function mergeConfig (cfg) {
   cfg.uid = genUid()
   Object.assign(config, cfg)
+  return config
 }
 
 function genUid () {

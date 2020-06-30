@@ -1,12 +1,12 @@
 import { getLineColNum, getStackTrace, isError } from '../helper'
-import { enhanceError } from '../report/index'
-import { ErrorTag } from '../constant'
+import { ErrorTag, C } from '../constant'
 
 export function windowConsole () {
-  if (!window.console || !window.console.error) return
+  const that = this
+  if (!C || !C.error) return
 
-  const originConsoleError = window.console.error
-  window.console.error = function () {
+  const originConsoleError = C.error
+  C.error = function () {
     const args = [].slice.call(arguments)
 
     const stackTrace = getStackTrace()
@@ -19,14 +19,16 @@ export function windowConsole () {
       return JSON.stringify(item)
     })
 
-    enhanceError({
-      err_type: ErrorTag.ConsoleError,
+    const fmtData = {
+      error_type: ErrorTag.ConsoleError,
+      error_msg: msg.join(','),
+      error_stack: ``,
+      error_extra: ``,
       fileUrl: fileUrl,
       lineno: lineNo,
-      colno: colNo,
-      msg: msg.join(','),
-      desc: `console.log(${msg.join(',')})`
-    })
+      colno: colNo
+    }
+    that._report(fmtData)
 
     originConsoleError.apply(window, arguments)
   }

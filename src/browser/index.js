@@ -8,24 +8,20 @@ export function sendError (err) {
 }
 
 export function catchBrowserError () {
-  try {
-    // console.error
-    windowConsole()
+  // console.error
+  windowConsole.call(this)
 
-    // 只能监听到js执行的错误，无法监听资源加载的错误
-    windowOnError()
+  // 只能监听到js执行的错误，无法监听资源加载的错误
+  windowOnError.call(this)
 
-    // 可以监听到js执行的错误，和资源加载的错误
-    windowListenerError()
+  // 可以监听到js执行的错误，和资源加载的错误
+  windowListenerError.call(this)
 
-    // promise
-    windowUnhandledRejectionError()
+  // promise
+  windowUnhandledRejectionError.call(this)
 
-    // 数据请求
-    windowAjaxError()
-  } catch (e) {
-    console.error(e)
-  }
+  // 数据请求
+  windowAjaxError.call(this)
 }
 
 export function attachUser (user) {

@@ -1,7 +1,7 @@
-import { enhanceError } from '../report/index'
 import { ErrorTag } from '../constant'
 
 export function windowAjaxError () {
+  const that = this
   const protocol = window.location.protocol
   if (protocol === 'file:') return
   if (!window.XMLHttpRequest) return
@@ -52,7 +52,7 @@ export function windowAjaxError () {
 
         // 当一个XMLHttpRequest请求完成的时候会触发load 事件。
         if (type === 'load') {
-          enhanceError({
+          that._report({
             error_tag: ErrorTag.AjaxError,
             error_msg: `event:${type.toUpperCase()} ${responseURL} ${status}`,
             error_extra: JSON.stringify({
@@ -70,7 +70,7 @@ export function windowAjaxError () {
           msg += attr.duration + 'ms'
         }
 
-        enhanceError({
+        that._report({
           error_tag: ErrorTag.AjaxError,
           error_msg: msg,
           error_extra: JSON.stringify({

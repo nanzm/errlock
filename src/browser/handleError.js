@@ -1,18 +1,19 @@
 import { getLineColNum, isFunction } from '../helper'
-import { enhanceError } from '../report/index'
 import { ErrorTag } from '../constant'
 
 export function windowOnError () {
+  const that = this
   const OriginWindowError = window.onerror
   window.onerror = function (msg, fileUrl, lineno,
     colno, error) {
-    enhanceError({
-      tag: ErrorTag.JsError,
+    that._report({
+      error_type: ErrorTag.JsError,
+      error_msg: msg,
+      error_stack: error && error.stack || '',
+      error_extra: ``,
       fileUrl,
       lineno,
-      colno,
-      msg,
-      desc: error && error.stack || ''
+      colno
     })
 
     if (OriginWindowError && isFunction(OriginWindowError)) {
@@ -24,6 +25,7 @@ export function windowOnError () {
 }
 
 export function windowListenerError () {
+  const that = this
   window.addEventListener('error', function (e) {
     e.preventDefault()
 
@@ -31,22 +33,24 @@ export function windowListenerError () {
       const target = e.target || e.srcElement
       const isElementTarget = target instanceof HTMLScriptElement || target instanceof HTMLLinkElement
       if (!isElementTarget) return
-
       // js css 资源加载错误
       const url = target.src || target.href
-      enhanceError({
-        tag: ErrorTag.LoadResError,
+
+      that._report({
+        error_type: ErrorTag.LoadResError,
+        error_msg: e.message,
+        error_stack: ``,
+        error_extra: ``,
         fileUrl: url,
         lineno: '',
-        colno: '',
-        error_msg: e.message,
-        desc: ''
+        colno: ''
       })
     }
   }, true)
 }
 
 export function windowUnhandledRejectionError () {
+  const that = this
   window.addEventListener('unhandledrejection', function (e) {
     e.preventDefault()
     if (e && e.reason && e.reason.stack) {
@@ -54,13 +58,14 @@ export function windowUnhandledRejectionError () {
       const stack = e.reason.stack
       const { lineNo, colNo, fileUrl } = getLineColNum(stack)
 
-      enhanceError({
-        tag: ErrorTag.UnHandledRejectionError,
+      that._report({
+        error_type: ErrorTag.UnHandledRejectionError,
+        error_msg: msg,
+        error_stack: stack,
+        error_extra: ``,
         fileUrl: fileUrl,
         lineno: lineNo,
-        colno: colNo,
-        msg: msg,
-        desc: stack
+        colno: colNo
       })
     }
   }, true)
