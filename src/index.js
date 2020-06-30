@@ -1,7 +1,7 @@
 import { mergeConfig } from './config'
-import { warn, error, isObject, underline } from './helper'
+import { warn, error } from './helper'
 import { catchBrowserError } from './browser/index'
-import { parserResult } from './browser/uaParse'
+import { getBrowserInfo, parserResult } from './browser/uaParse'
 import metric from './browser/metric'
 import { DataTag } from './constant'
 
@@ -28,6 +28,11 @@ class Ana {
 
   _report (data) {
     console.log(data)
+
+    const browserInfo = getBrowserInfo()
+    const metricData = this.metric.getMetricData()
+    console.log(browserInfo)
+    console.log(metricData)
   }
 
   enhanceError (data) {
@@ -36,29 +41,6 @@ class Ana {
     data.path = window.location.href
 
     console.warn(data)
-    // setTimeout(() => {
-    //   aliLogger(data)
-    // }, 0)
-  }
-
-  transferDeviceData (data) {
-    data.dataType = DataTag.DeviceInfo
-
-    // 打平 并转换成 下换线
-    const tmp = {}
-    Object.keys(data).forEach((key) => {
-      const item = data[key]
-
-      if (isObject(item)) {
-        Object.keys(item).forEach((k) => {
-          tmp[`${key}_${underline(k)}`] = item[k]
-        })
-        return
-      }
-      tmp[key] = item
-    })
-
-    console.log(tmp)
     // setTimeout(() => {
     //   aliLogger(data)
     // }, 0)

@@ -1,4 +1,5 @@
 import Browser from 'bowser'
+import { isObject, underline } from '../helper'
 
 const Parser = Browser.getParser(window.navigator.userAgent)
 export const userAgent = Parser.getUA()
@@ -18,7 +19,8 @@ export function getScreen () {
 
 export function getBrowserInfo () {
   const { engine, os, platform, browser } = parserResult
-  return {
+
+  const data = {
     screen: getScreen(),
     engine,
     os,
@@ -26,4 +28,19 @@ export function getBrowserInfo () {
     browser,
     user_agent: userAgent
   }
+
+  // 打平
+  const tmp = {}
+  Object.keys(data).forEach((key) => {
+    const item = data[key]
+
+    if (isObject(item)) {
+      Object.keys(item).forEach((k) => {
+        tmp[`${key}_${underline(k)}`] = item[k]
+      })
+      return
+    }
+    tmp[key] = item
+  })
+  return tmp
 }

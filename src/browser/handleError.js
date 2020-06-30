@@ -33,14 +33,17 @@ export function windowListenerError () {
       const target = e.target || e.srcElement
       const isElementTarget = target instanceof HTMLScriptElement || target instanceof HTMLLinkElement
       if (!isElementTarget) return
+
       // js css 资源加载错误
       const url = target.src || target.href
+      const tagName = target.localName || target.tagName
+      const outerHTML = target.outerHTML
 
       that._report({
         error_type: ErrorTag.LoadResError,
-        error_msg: e.message,
+        error_msg: `load ${tagName.toLowerCase()} error`,
         error_stack: ``,
-        error_extra: ``,
+        error_extra: outerHTML,
         fileUrl: url,
         lineno: '',
         colno: ''

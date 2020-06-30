@@ -3,7 +3,7 @@ import Perfume from 'perfume.js'
 const myAnalyticsTool = {
   _metricData: [],
   track: function (metricName, data) {
-    this._metricData.push({ metricName, data })
+    this._metricData.push({ [metricName]: data })
   },
   getMetricData: function () {
     return this._metricData
